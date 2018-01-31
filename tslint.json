@@ -1,0 +1,27 @@
+{
+	"defaultSeverity": "error",
+	"extends": [
+		"tslint:recommended"
+	],
+	"rules": {
+		"no-unused-expression": true,
+		"no-duplicate-variable": true,
+		"no-unused-variable": true,
+		"curly": true,
+		"class-name": true,
+		"semicolon": true,
+		"triple-equals": true,
+		"no-console": false,
+		"only-arrow-functions": [true],
+		"object-literal-sort-keys": [false],
+		"jsx-wrap-multiline": false,
+		"no-unnecessary-type-assertion": true,
+		"no-duplicate-imports": true,
+		"ordered-imports": true,
+		"interface-name": true,
+		"quotemark":false,
+		"trailing-comma":false,
+		"no-empty-interface": false,
+		"no-var-requires":false
+	}
+}
