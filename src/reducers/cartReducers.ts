@@ -1,8 +1,8 @@
-import * as cartActions from '../actions';
+import * as cartActions from '../actions/CartActions';
 
 export interface IState {
     user: string;
-    cart: cartActions.IItem[];
+    cart: cartActions.ICartItem[];
 }
 
 export const INITIAL_STATE: IState = {
@@ -11,11 +11,21 @@ export const INITIAL_STATE: IState = {
 };
 
 const addItemToCart = (state: IState = INITIAL_STATE, action: cartActions.IAddItemAction): IState => {
+    let found = false;
+    state.cart.map((i) => {
+        if (i.id === action.payload.id) {
+            found = true;
+        }
+    });
+    const payload = action.payload;
+    if (found) {
+        payload.quantity += action.payload.quantity;
+    }
     return {
         ...state,
         cart: [
             ...state.cart,
-            action.payload
+            payload
         ]
     };
 };
