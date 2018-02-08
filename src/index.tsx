@@ -1,25 +1,33 @@
 import * as React from 'react';
 import * as ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
-import { BrowserRouter as Router, Route } from 'react-router-dom';
+import { Route } from 'react-router-dom';
+import { ConnectedRouter } from 'react-router-redux';
+
 import App from './components/App';
-import { store } from './store';
+import Cart from './components/Cart/MyCart';
+// import Footer from './components/Footer';
+import NavBar from './components/NavBar';
+import store, { history} from './store';
 
 import 'semantic-ui-css/semantic.min.css';
 
 ReactDOM.render(
   <Provider store={store}>
-    <Router>
-      <Route path='/' component={App} />
-      {/*
-      <Router path='/register' component={Register} />
-      <Router path='/login' component={Login} />
-      <Router path='/browse' component={Browse} />
-      <Router path='/cart' component={Cart} />
-      <Router path='/checkout' component={Checkout} />
-      <Router path='/item?' component={ItemView} />
-    */}
-    </Router>
+    <ConnectedRouter history={history}>
+      <div>
+      <NavBar />
+        <Route exact path='/' component={App} />
+        <Route exact path='/browse' component={App} />
+        {/* <Route path='/register' component={Register} />
+        <Route path='/login' component={Login} />
+        <Route path='/browse' component={Browse} />
+        <Route path='/checkout' component={Checkout} />
+        <Route path='/item?' component={ItemView} /> */}
+        <Route path='/cart' component={Cart} />
+        {/* <Footer /> */}
+        </div>
+    </ConnectedRouter>
   </Provider>,
   document.getElementById('root') as HTMLElement
 );

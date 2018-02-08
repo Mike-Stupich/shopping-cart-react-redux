@@ -1,5 +1,5 @@
 import * as React from 'react';
-import ConnectedCards from '../containers/ConnectedCards';
+import ConnectedCards from '../../containers/ConnectedCards';
 
 class BrowseItems extends React.Component<{}, {}> {
     public render() {

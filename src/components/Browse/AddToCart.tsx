@@ -1,6 +1,7 @@
 import * as propTypes from 'prop-types';
 import * as React from 'react';
-import { IStoreItem } from '../actions/StoreActions';
+import { ICartItem, ICartItemWithQuantity } from '../../actions/CartActions';
+import { IStoreItem } from '../../actions/StoreActions';
 
 import {
     Button,
@@ -9,6 +10,7 @@ import {
 
 interface IProps {
     item: IStoreItem;
+    onAddClick: (item: ICartItemWithQuantity) => void;
 }
 
 class AddToCart extends React.Component<IProps, {}> {
@@ -19,9 +21,15 @@ class AddToCart extends React.Component<IProps, {}> {
             stock: propTypes.number.isRequired,
             image: propTypes.any.isRequired,
             soldout: propTypes.bool.isRequired,
-        })
+        }),
+        onAddClick: propTypes.func.isRequired
     };
-    private input: HTMLInputElement;
+    private input: HTMLInputElement | null;
+    private itemAsCartItem: ICartItem = {
+        id: this.props.item.id,
+        name: this.props.item.name,
+        quantity: this.props.item.stock
+    };
     constructor(props: IProps) {
         super(props);
     }
@@ -35,14 +43,15 @@ class AddToCart extends React.Component<IProps, {}> {
                             if (!this.input) {
                                 return;
                             }
-
+                            this.props.onAddClick({
+                                item: this.itemAsCartItem,
+                                amount: this.input.valueAsNumber
+                            });
                         }
                     }>
                     <input
-                        type='text'
-                        ref={(userInput: HTMLInputElement) => {
-                            this.input = userInput;
-                        }}
+                        type='number'
+                        ref={(userInput) => this.input = userInput}
                         placeholder='0'
                     />
                     <p>{this.props.item.stock} Available</p>

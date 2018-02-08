@@ -1,3 +1,5 @@
+import { IItemWithQuantity } from '../CartActions/cartInterfaces';
+export { IItemWithQuantity };
 export interface IStoreItem {
     id: number;
     name: string;
@@ -8,18 +10,12 @@ export interface IStoreItem {
 
 export interface IIncreaseStockAction {
     readonly type: 'INCREASE_STOCK';
-    readonly payload: {
-        id: number,
-        amount: number
-    };
+    readonly payload: IItemWithQuantity;
 }
 
 export interface IDecreaseStockAction {
     readonly type: 'DECREASE_STOCK';
-    readonly payload: {
-        id: number,
-        amount: number
-    };
+    readonly payload: IItemWithQuantity;
 }
 
 export interface IDisableProduct {
@@ -38,8 +34,8 @@ export interface IRemoveStoreItem {
 }
 
 export type TStoreTypes =
-| IIncreaseStockAction
-| IDecreaseStockAction
-| IDisableProduct
-| IAddStoreItem
-| IRemoveStoreItem;
+    | IIncreaseStockAction
+    | IDecreaseStockAction
+    | IDisableProduct
+    | IAddStoreItem
+    | IRemoveStoreItem;

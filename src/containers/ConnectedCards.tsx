@@ -1,7 +1,7 @@
 import { connect } from 'react-redux';
 import { addItemAction as dAddItemAction, TAddItemAction } from '../actions/CartActions';
-import { IStoreItem } from '../actions/StoreActions';
-import ItemGrid from '../components/ItemGrid';
+import { decreaseStockAction as dDecreaseStockAction, IStoreItem, TDecreaseStockAction } from '../actions/StoreActions';
+import ItemGrid from '../components/Browse/ItemGrid';
 import { IAppState } from '../reducers';
 
 export interface IStateProps {
@@ -10,21 +10,10 @@ export interface IStateProps {
 
 export interface IDispatchProps {
     addItemAction: TAddItemAction;
-    // disableProductAction: TdisableProductAction;
+    decreaseStockAction: TDecreaseStockAction;
 }
 
-// const getItemQuantity = (allItems: IStoreItem[], ownProps: IStoreItem[]) => {
-//     const itemsWithQuantity: IStoreItem[] = ownProps.map((item, index) => {
-//         const found = allItems.find((i) => (item.id === i.id));
-//         if (found) {
-//             return { ...item, stock: found.stock };
-//         }
-//         return { ...item };
-//     });
-//     return itemsWithQuantity;
-// };
-
-const checkIfSoldOut = (storeItems: IStoreItem[]): IStoreItem[]  => {
+const checkIfSoldOut = (storeItems: IStoreItem[]): IStoreItem[] => {
     const checkedItems = storeItems.map((item) => {
         if (item.stock === 0) {
             item.soldout = true;
@@ -41,7 +30,8 @@ const mapStateToProps = (state: IAppState): IStateProps => {
 };
 
 const ConnectedCards = connect(mapStateToProps, {
-    addItemAction: dAddItemAction
+    addItemAction: dAddItemAction,
+    decreaseStockAction: dDecreaseStockAction
 })(ItemGrid);
 
 export default ConnectedCards;

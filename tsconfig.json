@@ -1,8 +1,8 @@
 {
   "compilerOptions": {
-    "outDir": "build/dist",
+    "outDir": "build/",
     "module": "commonjs",
-    "target": "es6",
+    "target": "es5",
     "types": [
       "node"
     ],
@@ -18,7 +18,8 @@
     "noImplicitAny": true,
     "strictNullChecks": true,
     "suppressImplicitAnyIndexErrors": true,
-    "noUnusedLocals": true
+    "noUnusedLocals": true,
+    "baseUrl": "."
   },
   "exclude": [
     "node_modules",

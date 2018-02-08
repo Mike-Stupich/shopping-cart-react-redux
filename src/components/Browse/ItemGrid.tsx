@@ -5,8 +5,9 @@ import {
     Segment,
 } from 'semantic-ui-react';
 
-import { ICartItem } from '../actions/CartActions/';
-import { IDispatchProps, IStateProps } from '../containers/ConnectedCards';
+import { ICartItemWithQuantity } from '../../actions/CartActions/';
+import { IItemWithQuantity } from '../../actions/StoreActions';
+import { IDispatchProps, IStateProps } from '../../containers/ConnectedCards';
 import ItemCard from './ItemCard';
 
 class ItemGrid extends React.Component<IDispatchProps & IStateProps, {}> {
@@ -34,6 +35,9 @@ class ItemGrid extends React.Component<IDispatchProps & IStateProps, {}> {
                     >
                         {
                             this.props.items.map((item, index) => {
+                                if (item.soldout) {
+                                    return null;
+                                }
                                 return (
                                     <Grid.Column
                                         width={4}
@@ -42,7 +46,14 @@ class ItemGrid extends React.Component<IDispatchProps & IStateProps, {}> {
                                             key={item.id}
                                             item={item}
                                             onItemClick={
-                                                (i: ICartItem) => (this.props.addItemAction(i))}
+                                                (i: ICartItemWithQuantity) => {
+                                                    const decStock: IItemWithQuantity = {
+                                                        id: i.item.id, amount: i.amount
+                                                    };
+                                                    this.props.addItemAction(i);
+                                                    this.props.decreaseStockAction(decStock);
+                                                }
+                                            }
                                         />
                                     </Grid.Column>
                                 );

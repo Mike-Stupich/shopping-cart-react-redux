@@ -1,55 +1,27 @@
-import { createStore } from 'redux';
-import {addStoreItem, IStoreItem} from './actions/StoreActions';
+import createHistory from 'history/createBrowserHistory';
+import { routerMiddleware } from 'react-router-redux';
+import { applyMiddleware, createStore } from 'redux';
+import { addItemAction } from './actions/CartActions';
+import { addStoreItem } from './actions/StoreActions';
 import reducers from './reducers';
+import { cart, items } from './testData';
 
-const item1: IStoreItem = {
-    id: 1,
-    name: 'First Item',
-    stock: 5,
-    image: require('./assets/background.jpg'),
-    soldout: true
-};
+export const history = createHistory();
+const routeMiddleware = routerMiddleware(history);
 
-const item2: IStoreItem = {
-    id: 2,
-    name: 'Second Item',
-    stock: 8,
-    image: require('./assets/background.jpg'),
-    soldout: true
-};
-const item3: IStoreItem = {
-    id: 3,
-    name: 'Third Item',
-    stock: 2,
-    image: require('./assets/background.jpg'),
-    soldout: true
-};
-
-const item4: IStoreItem = {
-    id: 4,
-    name: 'Fourth Item',
-    stock: 2,
-    image: require('./assets/background.jpg'),
-    soldout: true
-};
-
-const item5: IStoreItem = {
-    id: 5,
-    name: 'Fifth Item',
-    stock: 0,
-    image: require('./assets/background.jpg'),
-    soldout: true
-};
-
-const store = createStore(reducers);
+const store = createStore(
+    reducers,
+    applyMiddleware(routeMiddleware)
+);
 store.subscribe(() => {
-     console.log(store.getState());
-    });
+    console.log(store.getState());
+});
 
-store.dispatch(addStoreItem(item1));
-store.dispatch(addStoreItem(item2));
-store.dispatch(addStoreItem(item3));
-store.dispatch(addStoreItem(item4));
-store.dispatch(addStoreItem(item5));
+items.map((item) => {
+    store.dispatch(addStoreItem(item));
+});
+cart.map((item) => {
+    store.dispatch(addItemAction({item, amount: 1}));
+});
 
-export { store };
+export default store;

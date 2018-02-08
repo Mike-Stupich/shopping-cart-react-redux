@@ -9,12 +9,13 @@ export const INITIAL_STATE: IState = {
 };
 
 const increaseItemStock = (state: IState, action: storeActions.IIncreaseStockAction): IState => {
+    const { id, amount } = action.payload;
     const newStock = state.stock.map((curr) => {
-        if (curr.id === action.payload.id) {
+        if (curr.id === id) {
             return {
                 id: curr.id,
                 name: curr.name,
-                stock: curr.stock + action.payload.amount,
+                stock: curr.stock + amount,
                 image: curr.image,
                 soldout: curr.soldout
             };
@@ -28,12 +29,13 @@ const increaseItemStock = (state: IState, action: storeActions.IIncreaseStockAct
 };
 
 const decreaseItemStock = (state: IState, action: storeActions.IDecreaseStockAction): IState => {
+    const { id, amount } = action.payload;
     const newStock = state.stock.map((curr) => {
-        if (curr.id === action.payload.id) {
+        if (curr.id === id) {
             return {
                 id: curr.id,
                 name: curr.name,
-                stock: curr.stock - action.payload.amount,
+                stock: curr.stock - amount,
                 image: curr.image,
                 soldout: curr.soldout
             };

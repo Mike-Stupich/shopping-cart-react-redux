@@ -2,12 +2,12 @@ import * as constants from './constants';
 import * as interfaces from './interfaces';
 
 export type TIncreaseStockAction = typeof increaseStockAction;
-export const increaseStockAction = ({ id, amount }: {id: number, amount: number }): interfaces.IIncreaseStockAction => {
-    return { type: constants.INCREASE_STOCK, payload: {id, amount} };
+export const increaseStockAction = (payload: interfaces.IItemWithQuantity): interfaces.IIncreaseStockAction => {
+    return { type: constants.INCREASE_STOCK, payload};
 };
 export type TDecreaseStockAction = typeof decreaseStockAction;
-export const decreaseStockAction = ({ id, amount }: {id: number, amount: number }): interfaces.IDecreaseStockAction => {
-    return { type: constants.DECREASE_STOCK, payload: {id, amount} };
+export const decreaseStockAction = (payload: interfaces.IItemWithQuantity): interfaces.IDecreaseStockAction => {
+    return { type: constants.DECREASE_STOCK, payload};
 };
 
 export type TDisableProductAction = typeof disableProductAction;

@@ -4,7 +4,7 @@ import {
     Card,
     Image,
 } from 'semantic-ui-react';
-import { IStoreItem } from '../actions/StoreActions';
+import { IStoreItem } from '../../actions/StoreActions';
 import AddToCart from './AddToCart';
 
 interface IProps {
@@ -29,7 +29,6 @@ class ItemCard extends React.Component<IProps, {}> {
     public render() {
         return (
             <Card
-            onClick={this.props.onItemClick}
             >
                 <Image
                     src={this.props.item.image}
@@ -40,7 +39,10 @@ class ItemCard extends React.Component<IProps, {}> {
                     </Card.Header>
                 </Card.Content>
                 <Card.Content>
-                    <AddToCart item={this.props.item}/>
+                    <AddToCart
+                    onAddClick={this.props.onItemClick}
+                    item={this.props.item}
+                    />
                 </Card.Content>
             </Card>
         );

@@ -1,3 +1,4 @@
+import { routerReducer } from 'react-router-redux';
 import { combineReducers } from 'redux';
 import { IState as CartState, modifyCart } from './cartReducers';
 import { IState as StoreState, modifyStore } from './storeReducers';
@@ -9,5 +10,6 @@ export interface IAppState {
 
 export default combineReducers({
     modifyCart,
-    modifyStore
+    modifyStore,
+    routerReducer
 });
