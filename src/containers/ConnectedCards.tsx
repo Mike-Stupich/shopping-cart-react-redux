@@ -1,11 +1,15 @@
 import { connect } from 'react-redux';
 import { addItemAction as dAddItemAction, TAddItemAction } from '../actions/CartActions';
-import { decreaseStockAction as dDecreaseStockAction, IStoreItem, TDecreaseStockAction } from '../actions/StoreActions';
+import {
+    decreaseStockAction as dDecreaseStockAction,
+    IItemFullData,
+    TDecreaseStockAction
+} from '../actions/StoreActions';
 import ItemGrid from '../components/Browse/ItemGrid';
 import { IAppState } from '../reducers';
 
 export interface IStateProps {
-    items: IStoreItem[];
+    items: IItemFullData[];
 }
 
 export interface IDispatchProps {
@@ -13,7 +17,7 @@ export interface IDispatchProps {
     decreaseStockAction: TDecreaseStockAction;
 }
 
-const checkIfSoldOut = (storeItems: IStoreItem[]): IStoreItem[] => {
+const checkIfSoldOut = (storeItems: IItemFullData[]): IItemFullData[] => {
     const checkedItems = storeItems.map((item) => {
         if (item.stock === 0) {
             item.soldout = true;

@@ -1,10 +1,11 @@
 import { IItemWithQuantity } from '../CartActions/cartInterfaces';
 export { IItemWithQuantity };
-export interface IStoreItem {
+export interface IItemFullData {
     id: number;
     name: string;
     image: any;
     stock: number;
+    description?: string;
     soldout: boolean;
 }
 
@@ -25,7 +26,7 @@ export interface IDisableProduct {
 
 export interface IAddStoreItem {
     readonly type: 'ADD_STORE_ITEM';
-    readonly payload: IStoreItem;
+    readonly payload: IItemFullData;
 }
 
 export interface IRemoveStoreItem {

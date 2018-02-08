@@ -11,25 +11,35 @@ export const INITIAL_STATE: IState = {
 };
 
 const addItemToCart = (state: IState, action: cartActions.IAddItemAction): IState => {
-    let found = false;
     const { item, amount } = action.payload;
-    state.cart.map((i) => {
+    const cartCopy = state.cart;
+    let found = false;
+    let newCart;
+    const itemInCart = cartCopy.map((i) => {
         if (i.item.id === item.id) {
             found = true;
+            return {item: i.item, amount: i.amount + amount};
         }
+        return i;
     });
+
     if (found) {
-        item.quantity += amount;
-    }
-    return {
-        ...state,
-        cart: [
-            ...state.cart,
+        newCart = [
+            ...itemInCart
+        ];
+    } else {
+        newCart = [
+            ...itemInCart,
             {
                 item,
                 amount
             }
-        ]
+        ];
+    }
+
+    return {
+        ...state,
+        cart: newCart
     };
 };
 

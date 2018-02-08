@@ -16,7 +16,7 @@ export const disableProductAction = (payload: number): interfaces.IDisableProduc
 };
 
 export type TAddStoreItem = typeof addStoreItem;
-export const addStoreItem = (payload: interfaces.IStoreItem): interfaces.IAddStoreItem => {
+export const addStoreItem = (payload: interfaces.IItemFullData): interfaces.IAddStoreItem => {
     return { type: constants.ADD_STORE_ITEM, payload };
 };
 export type TRemoveStoreItem = typeof removeStoreItem;

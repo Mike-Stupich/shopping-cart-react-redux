@@ -1,13 +1,14 @@
 import { ICartItem } from './actions/CartActions';
-import { IStoreItem } from './actions/StoreActions';
+import { IItemFullData } from './actions/StoreActions';
 
 // Dummy data to see what I'm doing
-const items: IStoreItem[] = [
+const items: IItemFullData[] = [
     {
         id: 1,
         name: 'Pants',
         stock: 5,
         image: require('./assets/1.jpg'),
+        description: `Fancy Pants`,
         soldout: false
     },
     {
@@ -15,6 +16,7 @@ const items: IStoreItem[] = [
         name: 'Hat',
         stock: 8,
         image: require('./assets/2.jpg'),
+        description: `Slick Hat`,
         soldout: false
     },
     {
@@ -22,6 +24,7 @@ const items: IStoreItem[] = [
         name: 'Gloves',
         stock: 2,
         image: require('./assets/3.jpg'),
+        description: `Gloves ooo`,
         soldout: false
     },
     {
@@ -29,6 +32,7 @@ const items: IStoreItem[] = [
         name: 'Mitts',
         stock: 2,
         image: require('./assets/4.jpg'),
+        description: `Mittens`,
         soldout: false
     },
     {
@@ -36,6 +40,7 @@ const items: IStoreItem[] = [
         name: 'Wallet',
         stock: 0,
         image: require('./assets/5.jpg'),
+        description: `Wallet`,
         soldout: true
     },
     {
@@ -43,6 +48,7 @@ const items: IStoreItem[] = [
         name: 'Shirt',
         stock: 4,
         image: require('./assets/6.jpg'),
+        description: `Shirts wow`,
         soldout: false
     },
     {
@@ -50,13 +56,15 @@ const items: IStoreItem[] = [
         name: 'Socks',
         stock: 2,
         image: require('./assets/7.jpg'),
-        soldout: false
+        soldout: false,
+        description: `Socks are cool`
     },
     {
         id: 8,
         name: 'Shoes',
         stock: 4,
         image: require('./assets/8.jpg'),
+        description: `Shoes are cool`,
         soldout: false
     },
     // {

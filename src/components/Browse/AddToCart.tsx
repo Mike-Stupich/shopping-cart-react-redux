@@ -1,7 +1,7 @@
 import * as propTypes from 'prop-types';
 import * as React from 'react';
 import { ICartItem, ICartItemWithQuantity } from '../../actions/CartActions';
-import { IStoreItem } from '../../actions/StoreActions';
+import { IItemFullData } from '../../actions/StoreActions';
 
 import {
     Button,
@@ -9,7 +9,7 @@ import {
 } from 'semantic-ui-react';
 
 interface IProps {
-    item: IStoreItem;
+    item: IItemFullData;
     onAddClick: (item: ICartItemWithQuantity) => void;
 }
 
@@ -21,6 +21,7 @@ class AddToCart extends React.Component<IProps, {}> {
             stock: propTypes.number.isRequired,
             image: propTypes.any.isRequired,
             soldout: propTypes.bool.isRequired,
+            description: propTypes.string
         }),
         onAddClick: propTypes.func.isRequired
     };

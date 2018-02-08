@@ -4,11 +4,11 @@ import {
     Card,
     Image,
 } from 'semantic-ui-react';
-import { IStoreItem } from '../../actions/StoreActions';
+import { IItemFullData } from '../../actions/StoreActions';
 import AddToCart from './AddToCart';
 
 interface IProps {
-    item: IStoreItem;
+    item: IItemFullData;
     onItemClick: any;
 }
 
@@ -19,7 +19,8 @@ class ItemCard extends React.Component<IProps, {}> {
             name: propTypes.string.isRequired,
             stock: propTypes.number.isRequired,
             image: propTypes.any.isRequired,
-            soldout: propTypes.bool.isRequired
+            soldout: propTypes.bool.isRequired,
+            description: propTypes.string,
         }).isRequired,
     };
     constructor(props: IProps) {

@@ -1,7 +1,7 @@
 import * as storeActions from '../actions/StoreActions';
 
 export interface IState {
-    stock: storeActions.IStoreItem[];
+    stock: storeActions.IItemFullData[];
 }
 
 export const INITIAL_STATE: IState = {
@@ -17,7 +17,8 @@ const increaseItemStock = (state: IState, action: storeActions.IIncreaseStockAct
                 name: curr.name,
                 stock: curr.stock + amount,
                 image: curr.image,
-                soldout: curr.soldout
+                soldout: curr.soldout,
+                description: curr.description,
             };
         }
         return curr;
@@ -37,7 +38,8 @@ const decreaseItemStock = (state: IState, action: storeActions.IDecreaseStockAct
                 name: curr.name,
                 stock: curr.stock - amount,
                 image: curr.image,
-                soldout: curr.soldout
+                soldout: curr.soldout,
+                description: curr.description,
             };
         }
         return curr;
@@ -57,6 +59,7 @@ const disableProduct = (state: IState, action: storeActions.IDisableProduct): IS
                 stock: curr.stock,
                 image: curr.image,
                 soldout: false,
+                description: curr.description
             };
         }
         return curr;
