@@ -11,7 +11,7 @@ import NavBar from './components/NavBar';
 import store, { history} from './store';
 
 import 'semantic-ui-css/semantic.min.css';
-
+require('./containers/stylesheet.css');
 ReactDOM.render(
   <Provider store={store}>
     <ConnectedRouter history={history}>

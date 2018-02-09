@@ -2,10 +2,12 @@ import * as storeActions from '../actions/StoreActions';
 
 export interface IState {
     stock: storeActions.IItemFullData[];
+    modal: storeActions.IModal | null;
 }
 
 export const INITIAL_STATE: IState = {
-    stock: []
+    stock: [],
+    modal: null
 };
 
 const increaseItemStock = (state: IState, action: storeActions.IIncreaseStockAction): IState => {
@@ -89,18 +91,36 @@ const removeStoreItem = (state: IState, action: storeActions.IRemoveStoreItem): 
     };
 };
 
+const displayModal = (state: IState, action: storeActions.IDisplayModalAction): IState => {
+    return {
+        ...state,
+        modal: action.payload
+    };
+};
+
+const addModal = (state: IState, action: storeActions.IAddModalAction): IState => {
+    return {
+        ...state,
+        modal: action.payload
+    };
+};
+
 export const modifyStore = (state: IState = INITIAL_STATE, action: storeActions.TStoreTypes): IState => {
     switch (action.type) {
-        case storeActions.INCREASE_STOCK:
+        case storeActions.StoreTypes.INCREASE_STOCK:
             return increaseItemStock(state, action);
-        case storeActions.DECREASE_STOCK:
+        case storeActions.StoreTypes.DECREASE_STOCK:
             return decreaseItemStock(state, action);
-        case storeActions.DISABLE_PRODUCT:
+        case storeActions.StoreTypes.DISABLE_PRODUCT:
             return disableProduct(state, action);
-        case storeActions.ADD_STORE_ITEM:
+        case storeActions.StoreTypes.ADD_STORE_ITEM:
             return addStoreItem(state, action);
-        case storeActions.REMOVE_STORE_ITEM:
+        case storeActions.StoreTypes.REMOVE_STORE_ITEM:
             return removeStoreItem(state, action);
+        case storeActions.StoreTypes.SHOW_MODAL:
+            return displayModal(state, action);
+        case storeActions.StoreTypes.ADD_MODAL:
+            return addModal(state, action);
         default:
             return state;
     }

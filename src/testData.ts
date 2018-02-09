@@ -1,5 +1,5 @@
 import { ICartItem } from './actions/CartActions';
-import { IItemFullData } from './actions/StoreActions';
+import { IItemFullData, IModal } from './actions/StoreActions';
 
 // Dummy data to see what I'm doing
 const items: IItemFullData[] = [
@@ -82,4 +82,16 @@ const cart: ICartItem[] = [
         quantity: 1
     },
 ];
-export { cart, items };
+
+const modal: IModal = {
+    item: {
+        id: 8,
+        name: 'Shoes',
+        stock: 4,
+        image: require('./assets/8.jpg'),
+        description: `Shoes are cool`,
+        soldout: false
+    },
+    visibility: false
+};
+export { cart, items, modal};

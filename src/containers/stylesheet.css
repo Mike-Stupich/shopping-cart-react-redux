@@ -1,0 +1,29 @@
+.addtocart {
+  position: block;
+  bottom: 0px;
+}
+
+.addtocart .addtocart-div {
+  display: inline;
+}
+
+.addtocart-input {
+  width: 45px;
+  height: 37px;
+  line-height: 1.65;
+  float: left;
+  display: block;
+  padding: 0;
+  margin: 0;
+  padding-left: 20px;
+  border: 1px solid #eee;
+}
+
+.item-display {
+  position: relative;
+}
+
+.item-display .item-display-image {
+  position: block;
+  top: 0px;
+}
