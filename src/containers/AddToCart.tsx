@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import {
   Button,
   Card,
+  Form,
   Modal,
 } from 'semantic-ui-react';
 import {
@@ -60,26 +61,18 @@ class AddToCart extends React.Component<IProps & IDispatchProps & IStateProps, I
           </Card.Description>
         </Card.Content>
         <Card.Content extra>
-          <div className='addtocart-div'>
-            <Button
-              type='submit'
-              active
+          <Form>
+            <Form.Group>
+              <input type='number' defaultValue='1' placeholder='1' ref={(ref: any) => this.amountToAdd = ref} />
+              <Form.Button
+              content='Add To Cart!'
               onClick={(e) => {
                 e.preventDefault();
                 this.props.addItemAction(this.convertToCartItem());
                 this.handleOpen();
-              }}
-            >Add To Cart</Button>
-            <input
-              className='addtocart-input'
-              type='number'
-              min={0}
-              max={this.props.availableStock}
-              placeholder='0'
-              defaultValue='0'
-              ref={(input) => this.amountToAdd = input}
-            />
-          </div>
+              }}/>
+              </Form.Group>
+            </Form>
         </Card.Content>
       </Card>
       </div>
@@ -107,10 +100,13 @@ class AddToCart extends React.Component<IProps & IDispatchProps & IStateProps, I
   private handleOpen = () => this.setState({ open: true });
 
   private convertToCartItem = (): ICartItemWithQuantity => {
-    if (!this.amountToAdd) {
-      this.amountAdded = 0;
-    } else {
+    if (this.amountToAdd) {
       this.amountAdded = this.amountToAdd.valueAsNumber;
+    } else {
+      this.amountAdded = 1;
+    }
+    if (isNaN(this.amountAdded)) {
+      this.amountAdded = 1;
     }
     return({
       item: {

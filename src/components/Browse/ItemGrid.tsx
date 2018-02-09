@@ -5,15 +5,12 @@ import {
   Segment,
 } from 'semantic-ui-react';
 
+import { ICartItemWithQuantity } from '../../actions/CartActions';
 import { IItemFullData } from '../../actions/StoreActions';
 import { IDispatchProps, IStateProps } from '../../containers/ConnectedCards';
 import ItemDisplay from './ItemDisplay';
 
-interface IState {
-  showModal: boolean;
-}
-
-class ItemGrid extends React.Component<IDispatchProps & IStateProps, IState> {
+class ItemGrid extends React.Component<IDispatchProps & IStateProps> {
   public static props = {
     items: propTypes.arrayOf(
       propTypes.shape({
@@ -26,9 +23,6 @@ class ItemGrid extends React.Component<IDispatchProps & IStateProps, IState> {
 
   constructor(props: IDispatchProps & IStateProps) {
     super(props);
-    this.state = {
-      showModal: false
-    };
   }
 
   public render() {
@@ -40,7 +34,9 @@ class ItemGrid extends React.Component<IDispatchProps & IStateProps, IState> {
       </Segment>
     );
   }
+
   // Dirtiest thing I've done in a while... I'll fix this when I'm being less stupid
+  // Can wrap in ${}
   private buildGrid = (items: IItemFullData[]) => {
     const gridItems = items.map((item, index) => {
       if (item.soldout) {
@@ -76,9 +72,24 @@ class ItemGrid extends React.Component<IDispatchProps & IStateProps, IState> {
       <ItemDisplay
         key={item.id}
         storeItem={item}
+        addItemDispatch={this.addItem}
       />
     </Grid.Column>
   )
+
+  private addItem = (item: IItemFullData, amount: number) => {
+    if (isNaN(amount)) {
+      amount = 1;
+    }
+    const { id, name, stock } = item;
+    const cartItem: ICartItemWithQuantity = ({item: {
+      id,
+      name,
+      quantity: stock
+    },
+    amount});
+    this.props.addItemAction(cartItem);
+  }
 }
 
 export default ItemGrid;
