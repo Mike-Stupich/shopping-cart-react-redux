@@ -6,12 +6,13 @@ import { ConnectedRouter } from 'react-router-redux';
 
 import App from './components/App';
 import Cart from './components/Cart/MyCart';
+import Checkout from './components/Checkout/Checkout';
 // import Footer from './components/Footer';
 import NavBar from './components/NavBar';
 import store, { history} from './store';
 
 import 'semantic-ui-css/semantic.min.css';
-require('./containers/stylesheet.css');
+require('./css/stylesheet.css');
 ReactDOM.render(
   <Provider store={store}>
     <ConnectedRouter history={history}>
@@ -20,10 +21,8 @@ ReactDOM.render(
         <Route exact path='/' component={App} />
         <Route exact path='/browse' component={App} />
         {/* <Route path='/register' component={Register} />
-        <Route path='/login' component={Login} />
-        <Route path='/browse' component={Browse} />
+        <Route path='/login' component={Login} /> */}
         <Route path='/checkout' component={Checkout} />
-        <Route path='/item?' component={ItemView} /> */}
         <Route path='/cart' component={Cart} />
         {/* <Footer /> */}
         </div>

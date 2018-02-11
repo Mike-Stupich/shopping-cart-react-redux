@@ -1,11 +1,11 @@
 import * as React from 'react';
 import {
     Grid,
-    Modal,
     Segment
 } from 'semantic-ui-react';
-import { IItemWithQuantity } from '../../actions/CartActions';
+import { ICartItem } from '../../actions/CartActions';
 import { IDispatchProps, IStateProps } from '../../containers/ConnectedCartDisplay';
+import MyModal from '../MyModal';
 import DisplayBox from './DisplayBox';
 
 interface IState {
@@ -23,7 +23,11 @@ export default class CartDisplay extends React.Component<IDispatchProps & IState
     public render() {
         return (
             <Segment vertical style={{ paddingTop: '5%' }}>
-                <this.modal />
+                <MyModal
+                open={this.state.open}
+                handleClose={this.close}
+                content={'Your changes have been saved!'}
+                />
                 <Grid
                     container
                     divided='vertically'
@@ -37,14 +41,14 @@ export default class CartDisplay extends React.Component<IDispatchProps & IState
                                     <DisplayBox
                                         key={i.item.id}
                                         cartItem={i}
-                                        modifyCartAmount={(payload: IItemWithQuantity) => {
+                                        modifyCartAmount={(payload: ICartItem) => {
                                             this.props.setCartAmountAction(payload);
                                         }}
                                         showModal={this.show}
                                     />
                                 </Grid.Column>
                             );
-                            if (i.item.quantity === 0) {
+                            if (i.item.stock === 0) {
                                 return null;
                             }
                             return (
@@ -59,17 +63,4 @@ export default class CartDisplay extends React.Component<IDispatchProps & IState
 
     private close = () => this.setState({ open: false });
     private show = () => this.setState({ open: true });
-
-    private modal = () => {
-        return (
-            <Modal
-                size='small'
-                open={this.state.open}
-                onClose={this.close}
-            >
-                <Modal.Header>Your changes have been saved!</Modal.Header>
-            </Modal>
-        );
-    }
-
 }

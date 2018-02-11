@@ -1,5 +1,4 @@
-import { IItemWithQuantity } from '../CartActions/cartInterfaces';
-export { IItemWithQuantity };
+import { ICartItem } from '../CartActions/cartInterfaces';
 import { StoreTypes } from './constants';
 export interface IItemFullData {
     id: number;
@@ -17,12 +16,12 @@ export interface IModal {
 
 export interface IIncreaseStockAction {
     readonly type: StoreTypes.INCREASE_STOCK;
-    readonly payload: IItemWithQuantity;
+    readonly payload: ICartItem;
 }
 
 export interface IDecreaseStockAction {
     readonly type: StoreTypes.DECREASE_STOCK;
-    readonly payload: IItemWithQuantity;
+    readonly payload: ICartItem;
 }
 
 export interface IDisableProduct {

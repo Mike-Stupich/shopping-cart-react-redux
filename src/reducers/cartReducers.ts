@@ -2,7 +2,7 @@ import * as cartActions from '../actions/CartActions';
 
 export interface IState {
     user: string;
-    cart: cartActions.ICartItemWithQuantity[];
+    cart: cartActions.ICartItem[];
 }
 
 export const INITIAL_STATE: IState = {
@@ -12,6 +12,7 @@ export const INITIAL_STATE: IState = {
 
 const addItemToCart = (state: IState, action: cartActions.IAddItemAction): IState => {
     const { item, amount } = action.payload;
+    console.log(action.payload);
     const cartCopy = state.cart;
     let found = false;
     let newCart;
@@ -44,7 +45,7 @@ const addItemToCart = (state: IState, action: cartActions.IAddItemAction): IStat
 };
 
 const removeItemFromCart = (state: IState, action: cartActions.IRemoveItemAction): IState => {
-    const { id } = action.payload; // TODO: Decrease by amount
+    const { id } = action.payload.item; // TODO: Decrease by amount
     return {
         ...state,
         cart: [...state.cart.filter((i) =>
@@ -54,7 +55,7 @@ const removeItemFromCart = (state: IState, action: cartActions.IRemoveItemAction
 };
 
 const setItemAmount = (state: IState, action: cartActions.ISetCartAmountAction): IState => {
-    const { id, amount } = action.payload;
+    const { item: cartItem, amount } = action.payload;
     if (amount < 0) {
         return state;
     }
@@ -62,7 +63,7 @@ const setItemAmount = (state: IState, action: cartActions.ISetCartAmountAction):
         ...state,
         cart: [
             ...state.cart.map((i) => {
-                if (id === i.item.id) {
+                if (cartItem.id === i.item.id) {
                     i.amount = amount;
                 }
                 return i;

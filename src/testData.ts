@@ -77,10 +77,16 @@ const items: IItemFullData[] = [
 ];
 const cart: ICartItem[] = [
     {
-        id: 7,
-        name: 'Socks',
-        quantity: 1
-    },
+        item: {
+            id: 7,
+            name: 'Socks',
+            stock: 2,
+            image: require('./assets/7.jpg'),
+            soldout: false,
+            description: `Socks are cool`
+        },
+        amount: 1
+    }
 ];
 
 const modal: IModal = {

@@ -2,7 +2,7 @@ import { connect } from 'react-redux';
 
 import {
     addItemAction as dAddItemAction,
-    ICartItemWithQuantity,
+    ICartItem,
     removeItemAction as dRemoveItemAction,
     setCartAmountAction as dSetCartAmountAction,
     TAddItemAction,
@@ -13,7 +13,7 @@ import CartDisplay from '../components/Cart/CartDisplay';
 import { IAppState } from '../reducers';
 
 export interface IStateProps {
-    cartItems: ICartItemWithQuantity[];
+    cartItems: ICartItem[];
 }
 
 export interface IDispatchProps {

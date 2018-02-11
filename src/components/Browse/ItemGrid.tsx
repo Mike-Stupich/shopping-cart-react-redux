@@ -1,11 +1,8 @@
 import * as propTypes from 'prop-types';
 import * as React from 'react';
-import {
-  Grid,
-  Segment,
-} from 'semantic-ui-react';
+import { Container, Divider, Grid, Header, Segment, } from 'semantic-ui-react';
 
-import { ICartItemWithQuantity } from '../../actions/CartActions';
+import { ICartItem } from '../../actions/CartActions';
 import { IItemFullData } from '../../actions/StoreActions';
 import { IDispatchProps, IStateProps } from '../../containers/ConnectedCards';
 import ItemDisplay from './ItemDisplay';
@@ -28,15 +25,21 @@ class ItemGrid extends React.Component<IDispatchProps & IStateProps> {
   public render() {
     return (
       <Segment vertical style={{ paddingTop: '5%' }}>
-        <Grid container stretched>
-          {this.buildGrid(this.props.items)}
-        </Grid>
+        <Container>
+        <Header
+            content='Browse'
+            size='large'
+          />
+          <Divider/>
+          <Grid stretched>
+            {this.buildGrid(this.props.items)}
+          </Grid>
+        </Container>
       </Segment>
     );
   }
 
   // Dirtiest thing I've done in a while... I'll fix this when I'm being less stupid
-  // Can wrap in ${}
   private buildGrid = (items: IItemFullData[]) => {
     const gridItems = items.map((item, index) => {
       if (item.soldout) {
@@ -78,16 +81,14 @@ class ItemGrid extends React.Component<IDispatchProps & IStateProps> {
   )
 
   private addItem = (item: IItemFullData, amount: number) => {
+    console.log('ItemGrid');
     if (isNaN(amount)) {
       amount = 1;
     }
-    const { id, name, stock } = item;
-    const cartItem: ICartItemWithQuantity = ({item: {
-      id,
-      name,
-      quantity: stock
-    },
-    amount});
+    const cartItem: ICartItem = ({
+      item,
+      amount
+    });
     this.props.addItemAction(cartItem);
   }
 }

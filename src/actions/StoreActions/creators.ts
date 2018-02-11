@@ -1,12 +1,13 @@
+import {ICartItem } from '../CartActions/cartInterfaces';
 import {StoreTypes} from './constants';
 import * as interfaces from './interfaces';
 
 export type TIncreaseStockAction = typeof increaseStockAction;
-export const increaseStockAction = (payload: interfaces.IItemWithQuantity): interfaces.IIncreaseStockAction => {
+export const increaseStockAction = (payload: ICartItem): interfaces.IIncreaseStockAction => {
     return { type: StoreTypes.INCREASE_STOCK, payload};
 };
 export type TDecreaseStockAction = typeof decreaseStockAction;
-export const decreaseStockAction = (payload: interfaces.IItemWithQuantity): interfaces.IDecreaseStockAction => {
+export const decreaseStockAction = (payload: ICartItem): interfaces.IDecreaseStockAction => {
     return { type: StoreTypes.DECREASE_STOCK, payload};
 };
 

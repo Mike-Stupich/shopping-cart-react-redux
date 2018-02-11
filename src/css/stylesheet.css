@@ -1,0 +1,69 @@
+.addtocart {
+  position: block;
+  bottom: 0px;
+}
+
+.addtocart .addtocart-div {
+  display: inline;
+}
+
+.addtocart-input {
+  width: 45px;
+  height: 37px;
+  line-height: 1.65;
+  float: left;
+  display: block;
+  padding: 0;
+  margin: 0;
+  padding-left: 20px;
+  border: 1px solid #eee;
+}
+
+.item-display {
+  position: relative;
+}
+
+.item-display .item-display-image {
+  position: block;
+  top: 0px;
+}
+
+.list {
+ max-height: 10%;
+}
+
+.list .list-item {
+  max-width: 100%;
+  max-height: 500px;
+}
+
+.list .list-item  .list-image {
+  position: relative;
+  max-height: 400px;
+  max-width: 400px;  
+}
+
+.list .list-item .list-button {
+  position: relative;
+  right: 0;
+
+}
+
+.form-group {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.form-button {
+  padding-top: 1em;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.cancel {
+  position: relative;
+  top: 0;
+  right: 0;
+}

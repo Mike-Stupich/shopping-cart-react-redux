@@ -11,9 +11,9 @@ export const INITIAL_STATE: IState = {
 };
 
 const increaseItemStock = (state: IState, action: storeActions.IIncreaseStockAction): IState => {
-    const { id, amount } = action.payload;
+    const { item, amount } = action.payload;
     const newStock = state.stock.map((curr) => {
-        if (curr.id === id) {
+        if (curr.id === item.id) {
             return {
                 id: curr.id,
                 name: curr.name,
@@ -32,9 +32,9 @@ const increaseItemStock = (state: IState, action: storeActions.IIncreaseStockAct
 };
 
 const decreaseItemStock = (state: IState, action: storeActions.IDecreaseStockAction): IState => {
-    const { id, amount } = action.payload;
+    const { item, amount } = action.payload;
     const newStock = state.stock.map((curr) => {
-        if (curr.id === id) {
+        if (curr.id === item.id) {
             return {
                 id: curr.id,
                 name: curr.name,

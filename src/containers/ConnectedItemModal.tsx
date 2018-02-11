@@ -1,6 +1,5 @@
 import * as React from 'react';
 import { connect } from 'react-redux';
-// import { NumberPicker } from 'react-widgets';
 import {
   Header,
   Image,
@@ -8,7 +7,7 @@ import {
 } from 'semantic-ui-react';
 import {
   addItemAction as dAddItemAction,
-  ICartItemWithQuantity,
+  ICartItem,
   setCartAmountAction as dSetCartAmountAction,
   TAddItemAction,
   TSetCartAmountAction
@@ -30,13 +29,11 @@ interface IDispatchProps {
 
 interface IStateProps {
   modalInfo: IModal;
-  userCartInfo: ICartItemWithQuantity[];
+  userCartInfo: ICartItem[];
 }
 class ConnectedItemModal extends React.Component<IDispatchProps & IStateProps> {
-  // private amountInCart: number;
   public constructor(props: IProps & IDispatchProps & IStateProps) {
     super(props);
-    // this.amountInCart = this.findAmountInCart(this.props.modalInfo.item);
   }
 
   public render() {
@@ -55,11 +52,6 @@ class ConnectedItemModal extends React.Component<IDispatchProps & IStateProps> {
             <Header>{this.props.modalInfo.item.name}</Header>
             <p>{this.props.modalInfo.item.description}</p>
           </Modal.Description>
-          {/* <NumberPicker
-            max={this.props.modalInfo.item.stock}
-            min={0}
-            defaultValue={this.amountInCart}
-          /> */}
         </Modal.Content>
       </Modal>
     );

@@ -7,12 +7,11 @@ import {
     Segment
 } from 'semantic-ui-react';
 
-import { ICartItemWithQuantity } from '../../actions/CartActions';
-import { IItemWithQuantity } from "../../actions/StoreActions";
+import { ICartItem } from '../../actions/CartActions';
 
 interface IProps {
-    cartItem: ICartItemWithQuantity;
-    modifyCartAmount: (payload: IItemWithQuantity) => void;
+    cartItem: ICartItem;
+    modifyCartAmount: (payload: ICartItem) => void;
     showModal: () => void;
 }
 
@@ -45,7 +44,8 @@ class DisplayBox extends React.Component<IProps, IState> {
     public render() {
         return (
             <Segment>
-                <Item>
+                {/* Put detailed view here */}
+                <Item className='item-display'>
                     <Item.Image
                         src={require(`../../assets/${this.props.cartItem.item.id}.jpg`)}
                         size='large'
@@ -56,7 +56,7 @@ class DisplayBox extends React.Component<IProps, IState> {
                             {this.props.cartItem.item.name}
                             <input
                                 type='number'
-                                max={this.props.cartItem.item.quantity}
+                                max={this.props.cartItem.item.stock}
                                 min={0}
                                 ref={(ref) => this.input = ref}
                                 onChange={this.showSavebutton}
@@ -78,10 +78,7 @@ class DisplayBox extends React.Component<IProps, IState> {
                     if (!this.input) {
                         return;
                     }
-                    this.props.modifyCartAmount({
-                        id: this.props.cartItem.item.id,
-                        amount: this.input.valueAsNumber
-                    });
+                    this.props.modifyCartAmount(this.props.cartItem);
                     this.props.showModal();
                 }
             }

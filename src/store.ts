@@ -21,7 +21,7 @@ items.map((item) => {
     store.dispatch(addStoreItem(item));
 });
 cart.map((item) => {
-    store.dispatch(addItemAction({item, amount: 1}));
+    store.dispatch(addItemAction(item));
 });
 
 export default store;

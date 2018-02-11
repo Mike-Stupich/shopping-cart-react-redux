@@ -1,36 +1,26 @@
+import { IItemFullData } from '../StoreActions/interfaces';
 import { CartTypes } from './cartConstants';
-
 // Item Interfaces for the Cart
+
 export interface ICartItem {
-    id: number;
-    name: string;
-    quantity: number;
-}
-
-export interface IItemWithQuantity {
-    id: number;
-    amount: number;
-}
-
-export interface ICartItemWithQuantity {
-    item: ICartItem;
+    item: IItemFullData;
     amount: number;
 }
 
 // Cart Action Interfaces
 export interface IAddItemAction {
     readonly type: CartTypes.ADD_ITEM;
-    readonly payload: ICartItemWithQuantity;
+    readonly payload: ICartItem;
 }
 
 export interface IRemoveItemAction {
     readonly type: CartTypes.REMOVE_ITEM;
-    readonly payload: IItemWithQuantity;
+    readonly payload: ICartItem;
 }
 
 export interface ISetCartAmountAction {
     readonly type: CartTypes.SET_AMOUNT;
-    readonly payload: IItemWithQuantity;
+    readonly payload: ICartItem;
 }
 
 export type TCartTypes = IAddItemAction
