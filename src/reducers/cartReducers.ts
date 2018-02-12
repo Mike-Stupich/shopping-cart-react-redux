@@ -12,7 +12,6 @@ export const INITIAL_STATE: IState = {
 
 const addItemToCart = (state: IState, action: cartActions.IAddItemAction): IState => {
     const { item, amount } = action.payload;
-    console.log(action.payload);
     const cartCopy = state.cart;
     let found = false;
     let newCart;

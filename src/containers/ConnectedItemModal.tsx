@@ -57,15 +57,6 @@ class ConnectedItemModal extends React.Component<IDispatchProps & IStateProps> {
     );
   }
   private close = () => this.setState({ modalVisible: false });
-  private findAmountInCart = (item: IItemFullData): number => {
-    console.log('Amount in Cart', this.findAmountInCart);
-    const checkCart = this.props.userCartInfo.find((cartItem) => (item.id === cartItem.item.id));
-    if (!checkCart) {
-      return 0;
-    }
-    return checkCart.amount;
-  }
-
 }
 
 const mapStateToProps = (state: IAppState): IStateProps => {

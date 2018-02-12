@@ -81,7 +81,6 @@ class ItemGrid extends React.Component<IDispatchProps & IStateProps> {
   )
 
   private addItem = (item: IItemFullData, amount: number) => {
-    console.log('ItemGrid');
     if (isNaN(amount)) {
       amount = 1;
     }

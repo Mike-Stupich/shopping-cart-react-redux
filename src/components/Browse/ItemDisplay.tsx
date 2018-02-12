@@ -52,7 +52,6 @@ class ItemDisplay extends React.Component<IProps, IState> {
                     centered
                     onClick={
                       (e: any) => {
-                        console.log('Item CLicked');
                         this.detailsClick(this.props.storeItem);
                         this.handleOpen();
                       }}
