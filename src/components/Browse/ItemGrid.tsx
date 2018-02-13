@@ -3,7 +3,7 @@ import * as React from 'react';
 import { Container, Divider, Grid, Header, Segment, } from 'semantic-ui-react';
 
 import { ICartItem } from '../../actions/CartActions';
-import { IItemFullData } from '../../actions/StoreActions';
+import { IItemFullData, IItemFullDataWithTx } from '../../actions/StoreActions';
 import { IDispatchProps, IStateProps } from '../../containers/ConnectedCards';
 import ItemDisplay from './ItemDisplay';
 
@@ -40,12 +40,16 @@ class ItemGrid extends React.Component<IDispatchProps & IStateProps> {
   }
 
   // Dirtiest thing I've done in a while... I'll fix this when I'm being less stupid
-  private buildGrid = (items: IItemFullData[]) => {
+  private buildGrid = (items: IItemFullDataWithTx[]) => {
+    if (!items) {
+      return null;
+    }
     const gridItems = items.map((item, index) => {
-      if (item.soldout) {
+      const { storeItem } = item;
+      if (storeItem.soldout) {
         return null;
       }
-      return (this.ItemColumn(item));
+      return (this.ItemColumn(storeItem));
     });
     let cols: JSX.Element[] = [];
     const rows: JSX.Element[] = [];

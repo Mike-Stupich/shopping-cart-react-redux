@@ -36,6 +36,8 @@ export const modifyWeb3 = (state: IState = INITIAL_STATE, action: Web3Actions.TW
       return createNewInstance(state, action);
     case Web3Actions.Web3Types.SET_PROVIDER:
       return setProvider(state, action);
+    // case Web3Actions.Web3Types.DEPLOY_STORE:
+    //     return deployStoreContract(state, action);
     default:
       return state;
   }

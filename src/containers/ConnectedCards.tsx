@@ -5,28 +5,29 @@ import {
 } from '../actions/CartActions';
 import {
   decreaseStockAction as dDecreaseStockAction,
-  displayModalAction as dDisplayModalAction,
-  IItemFullData,
+  IItemFullDataWithTx,
   TDecreaseStockAction,
-  TDisplayModalAction,
 } from '../actions/StoreActions';
 import ItemGrid from '../components/Browse/ItemGrid';
 import { IAppState } from '../reducers';
 
+// tslint:disable:array-type
 export interface IStateProps {
-  items: IItemFullData[];
+  items: IItemFullDataWithTx[];
 }
 
 export interface IDispatchProps {
   addItemAction: TAddItemAction;
   decreaseStockAction: TDecreaseStockAction;
-  displayModalAction: TDisplayModalAction;
 }
 
-const checkIfSoldOut = (storeItems: IItemFullData[]): IItemFullData[] => {
+const checkIfSoldOut = (storeItems: IItemFullDataWithTx[]): IItemFullDataWithTx[] => {
+  if (!storeItems) {
+    return [];
+  }
   const checkedItems = storeItems.map((item) => {
-    if (item.stock === 0) {
-      item.soldout = true;
+    if (item.storeItem.stock === 0) {
+      item.storeItem.soldout = true;
     }
     return item;
   });
@@ -42,7 +43,6 @@ const mapStateToProps = (state: IAppState): IStateProps => {
 const ConnectedCards = connect(mapStateToProps, {
   addItemAction: dAddItemAction,
   decreaseStockAction: dDecreaseStockAction,
-  displayModalAction: dDisplayModalAction
 })(ItemGrid);
 
 export default ConnectedCards;

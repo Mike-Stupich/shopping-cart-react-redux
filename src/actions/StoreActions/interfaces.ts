@@ -1,3 +1,4 @@
+import { W3 } from 'soltsice';
 import { ICartItem } from '../CartActions/cartInterfaces';
 import { StoreTypes } from './constants';
 export interface IItemFullData {
@@ -12,6 +13,11 @@ export interface IItemFullData {
 export interface IModal {
     item: IItemFullData;
     visibility: boolean;
+}
+
+export interface IItemFullDataWithTx {
+    storeItem: IItemFullData;
+    tx: Promise<W3.TX.TransactionResult>;
 }
 
 export interface IIncreaseStockAction {
@@ -39,15 +45,23 @@ export interface IRemoveStoreItem {
     readonly payload: number;
 }
 
-export interface IDisplayModalAction {
-    readonly type: StoreTypes.SHOW_MODAL;
-    readonly payload: IModal;
+export interface IIncrementIndex {
+    readonly type: StoreTypes.INCREMENT_INDEX;
 }
 
-export interface IAddModalAction {
-    readonly type: StoreTypes.ADD_MODAL;
-    readonly payload: IModal;
+export interface RequestItems {
+    readonly type: StoreTypes.REQUEST_ITEMS;
 }
+
+export interface ReceiveItems {
+    readonly type: StoreTypes.RECEIVE_ITEMS;
+    readonly payload: () => IItemFullData[];
+}
+
+export interface GetDeployedStore {
+    readonly type: StoreTypes.GET_DEPLOYED_STORE;
+    readonly payload: string;
+  }
 
 export type TStoreTypes =
     | IIncreaseStockAction
@@ -55,5 +69,8 @@ export type TStoreTypes =
     | IDisableProduct
     | IAddStoreItem
     | IRemoveStoreItem
-    | IDisplayModalAction
-    | IAddModalAction;
+    | IIncrementIndex
+    | RequestItems
+    | ReceiveItems
+    | GetDeployedStore
+;

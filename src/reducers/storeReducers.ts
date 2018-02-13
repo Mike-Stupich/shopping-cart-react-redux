@@ -91,20 +91,6 @@ const removeStoreItem = (state: IState, action: storeActions.IRemoveStoreItem): 
     };
 };
 
-const displayModal = (state: IState, action: storeActions.IDisplayModalAction): IState => {
-    return {
-        ...state,
-        modal: action.payload
-    };
-};
-
-const addModal = (state: IState, action: storeActions.IAddModalAction): IState => {
-    return {
-        ...state,
-        modal: action.payload
-    };
-};
-
 export const modifyStore = (state: IState = INITIAL_STATE, action: storeActions.TStoreTypes): IState => {
     switch (action.type) {
         case storeActions.StoreTypes.INCREASE_STOCK:
@@ -117,10 +103,6 @@ export const modifyStore = (state: IState = INITIAL_STATE, action: storeActions.
             return addStoreItem(state, action);
         case storeActions.StoreTypes.REMOVE_STORE_ITEM:
             return removeStoreItem(state, action);
-        case storeActions.StoreTypes.SHOW_MODAL:
-            return displayModal(state, action);
-        case storeActions.StoreTypes.ADD_MODAL:
-            return addModal(state, action);
         default:
             return state;
     }

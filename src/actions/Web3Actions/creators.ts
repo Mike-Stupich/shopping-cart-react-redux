@@ -15,3 +15,9 @@ export type TdeployStoreContract = typeof deployStoreContract;
 export const deployStoreContract = (): interfaces.DeployStore => {
   return { type: Web3Types.DEPLOY_STORE };
 };
+
+
+export type TGetDeployedStore = typeof getDeployedStore;
+export const getDeployedStore = (payload: string): interfaces.GetDeployedStore => {
+  return { type: Web3Types.GET_DEPLOYED_STORE, payload };
+};

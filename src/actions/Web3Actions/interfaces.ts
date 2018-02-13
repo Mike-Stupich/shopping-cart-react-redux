@@ -14,7 +14,13 @@ export interface DeployStore {
   readonly type: Web3Types.DEPLOY_STORE;
 }
 
+export interface GetDeployedStore {
+  readonly type: Web3Types.GET_DEPLOYED_STORE;
+  readonly payload: string;
+}
+
 export type TWeb3Types =
   | SetProvider
   | CreateInstance
-  | DeployStore;
+  | DeployStore
+  | GetDeployedStore;

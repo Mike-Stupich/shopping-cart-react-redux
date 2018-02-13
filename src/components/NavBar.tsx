@@ -37,7 +37,9 @@ class NavBar extends React.Component<{}, {}> {
                 <Menu.Item as={Link} to='/checkout' >
                     <Menu.Item>Checkout</Menu.Item>
                 </Menu.Item>
-                <Menu.Item as='a' href='https://github.com/Mike-Stupich/shopping-cart-react-redux'>
+                <Menu.Item as={Link} to='/addItem' >
+                    <Menu.Item>Add New Items</Menu.Item>
+                </Menu.Item><Menu.Item as='a' href='https://github.com/Mike-Stupich/shopping-cart-react-redux'>
                     <Menu.Item>Source Code</Menu.Item>
                 </Menu.Item>
                 <Menu.Menu position='right'>

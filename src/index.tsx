@@ -4,6 +4,7 @@ import { Provider } from 'react-redux';
 import { Route } from 'react-router-dom';
 import { ConnectedRouter } from 'react-router-redux';
 
+import AddItemToStore from './components/AddItemToStore';
 import App from './components/App';
 import Cart from './components/Cart/MyCart';
 import Checkout from './components/Checkout/Checkout';
@@ -24,6 +25,7 @@ ReactDOM.render(
         <Route path='/login' component={Login} /> */}
         <Route path='/checkout' component={Checkout} />
         <Route path='/cart' component={Cart} />
+        <Route path='/addItem' component={AddItemToStore} />
         {/* <Footer /> */}
         </div>
     </ConnectedRouter>
