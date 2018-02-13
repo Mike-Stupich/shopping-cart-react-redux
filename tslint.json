@@ -18,7 +18,7 @@
 		"no-unnecessary-type-assertion": true,
 		"no-duplicate-imports": true,
 		"ordered-imports": true,
-		"interface-name": true,
+		"interface-name": false,
 		"quotemark":false,
 		"trailing-comma":false,
 		"no-empty-interface": false,

@@ -2,7 +2,7 @@
   "compilerOptions": {
     "outDir": "build/",
     "module": "commonjs",
-    "target": "es5",
+    "target": "es6",
     "types": [
       "node"
     ],
@@ -28,6 +28,7 @@
     "acceptance-tests",
     "webpack",
     "jest",
-    "src/setupTests.ts"
+    "src/setupTests.ts",
+    "**/*.js"
   ]
 }
