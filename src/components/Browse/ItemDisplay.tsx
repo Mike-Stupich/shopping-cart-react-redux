@@ -47,12 +47,12 @@ class ItemDisplay extends React.Component<IProps, IState> {
             >
                 <Item.Image
                     className='item-display-image'
-                    src={require(`../../assets/${this.props.storeItem.id}.jpg`)}
+                    // src={require(`../../assets/${this.props.storeItem.id}.jpg`)}
+                    src={this.props.storeItem.image}
                     size='large'
                     centered
                     onClick={
                       (e: any) => {
-                        console.log('Item CLicked');
                         this.detailsClick(this.props.storeItem);
                         this.handleOpen();
                       }}

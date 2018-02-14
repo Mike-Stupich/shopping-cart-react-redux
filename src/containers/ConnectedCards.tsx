@@ -5,7 +5,7 @@ import {
 } from '../actions/CartActions';
 import {
   decreaseStockAction as dDecreaseStockAction,
-  IItemFullDataWithTx,
+  IItemFullData,
   TDecreaseStockAction,
 } from '../actions/StoreActions';
 import ItemGrid from '../components/Browse/ItemGrid';
@@ -13,7 +13,8 @@ import { IAppState } from '../reducers';
 
 // tslint:disable:array-type
 export interface IStateProps {
-  items: IItemFullDataWithTx[];
+  items: IItemFullData[];
+  index: number;
 }
 
 export interface IDispatchProps {
@@ -21,13 +22,13 @@ export interface IDispatchProps {
   decreaseStockAction: TDecreaseStockAction;
 }
 
-const checkIfSoldOut = (storeItems: IItemFullDataWithTx[]): IItemFullDataWithTx[] => {
+const checkIfSoldOut = (storeItems: IItemFullData[]): IItemFullData[] => {
   if (!storeItems) {
     return [];
   }
   const checkedItems = storeItems.map((item) => {
-    if (item.storeItem.stock === 0) {
-      item.storeItem.soldout = true;
+    if (item.stock === 0) {
+      item.soldout = true;
     }
     return item;
   });
@@ -36,7 +37,8 @@ const checkIfSoldOut = (storeItems: IItemFullDataWithTx[]): IItemFullDataWithTx[
 
 const mapStateToProps = (state: IAppState): IStateProps => {
   return {
-    items: checkIfSoldOut(state.modifyStore.stock)
+    items: checkIfSoldOut(state.modifyStore.localStock),
+    index: state.modifyStore.itemIndex
   };
 };
 

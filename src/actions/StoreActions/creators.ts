@@ -1,4 +1,3 @@
-// import { ThunkAction } from 'redux-thunk';
 import { ICartItem } from '../CartActions/cartInterfaces';
 import { StoreTypes } from './constants';
 import * as interfaces from './interfaces';
@@ -39,6 +38,16 @@ export const requestItems = (): interfaces.RequestItems => {
 export type TGetDeployedStore = typeof getDeployedStore;
 export const getDeployedStore = (payload: string): interfaces.GetDeployedStore => {
   return { type: StoreTypes.GET_DEPLOYED_STORE, payload };
+};
+
+export type TGetItems = typeof getItems;
+export const getItems = (payload: number): interfaces.GetItem => {
+  return { type: StoreTypes.GET_ITEM, payload };
+};
+
+export type TNewStore = typeof newStore;
+export const newStore = (payload: string): interfaces.NewStore => {
+  return { type: StoreTypes.NEW_STORE, payload };
 };
 
 // export type TReceiveItems = typeof receiveItems;

@@ -6,7 +6,7 @@ export interface IItemFullData {
     name: string;
     image: any;
     stock: number;
-    description?: string;
+    description: string;
     soldout: boolean;
 }
 
@@ -62,6 +62,15 @@ export interface GetDeployedStore {
     readonly type: StoreTypes.GET_DEPLOYED_STORE;
     readonly payload: string;
   }
+export interface NewStore {
+    readonly type: StoreTypes.NEW_STORE;
+    readonly payload: string;
+}
+
+export interface GetItem {
+    readonly type: StoreTypes.GET_ITEM;
+    readonly payload: number;
+}
 
 export type TStoreTypes =
     | IIncreaseStockAction
@@ -73,4 +82,6 @@ export type TStoreTypes =
     | RequestItems
     | ReceiveItems
     | GetDeployedStore
+    | GetItem
+    | NewStore
 ;
