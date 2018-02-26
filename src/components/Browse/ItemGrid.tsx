@@ -20,17 +20,19 @@ class ItemGrid extends React.Component<IDispatchProps & IStateProps> {
 
   constructor(props: IDispatchProps & IStateProps) {
     super(props);
+    // this.getAllItems();
+    // this.props.getItemFromContract(1);
   }
 
   public render() {
     return (
       <Segment vertical style={{ paddingTop: '5%' }}>
         <Container>
-        <Header
+          <Header
             content='Browse'
             size='large'
           />
-          <Divider/>
+          <Divider />
           <Grid stretched>
             {this.buildGrid(this.props.items)}
           </Grid>
@@ -38,6 +40,16 @@ class ItemGrid extends React.Component<IDispatchProps & IStateProps> {
       </Segment>
     );
   }
+
+  // private getAllItems = async () => {
+  //   const index = this.props.index;
+  //   if (index === 0) {
+  //     return;
+  //   }
+  //   for (let id = 0; id < index; ++id) {
+  //     this.props.getItem(id);
+  //   }
+  // }
 
   // Dirtiest thing I've done in a while... I'll fix this when I'm being less stupid
   private buildGrid = (items: IItemFullData[]) => {
@@ -50,29 +62,30 @@ class ItemGrid extends React.Component<IDispatchProps & IStateProps> {
       }
       return (this.ItemColumn(item));
     });
-    let cols: JSX.Element[] = [];
-    const rows: JSX.Element[] = [];
-    gridItems.map((item, index) => {
-      if (item === null) {
-        return;
-      }
-      cols.push(item);
-      if (index % 4 === 3) {
-        rows.push(this.injectIntoRow(cols, index));
-        cols = [];
-      }
-    });
-    return rows;
+    // let cols: JSX.Element[] = [];
+    // const rows: JSX.Element[] = [];
+    // gridItems.map((item, index) => {
+    //   if (item === null) {
+    //     return;
+    //   }
+    //   cols.push(item);
+    //   if (index % 4 === 3) {
+    //     rows.push(this.injectIntoRow(cols, index));
+    //     cols = [];
+    //   }
+    // });
+    // return rows;
+    return gridItems;
   }
-  private injectIntoRow = (cols: JSX.Element[], index: number): JSX.Element => (
-    <Grid.Row key={index}>
-      {cols.map((col) => (col))}
-    </Grid.Row>
-  )
+  // private injectIntoRow = (cols: JSX.Element[], index: number): JSX.Element => (
+  //   <Grid.Row key={index}>
+  //     {cols.map((col) => (col))}
+  //   </Grid.Row>
+  // )
 
 
-  private ItemColumn = (item: IItemFullData) => (
-    <Grid.Column
+  private ItemColumn = (item: IItemFullData) => {
+    return (<Grid.Column
       width={4}
       key={item.id}>
       <ItemDisplay
@@ -81,10 +94,20 @@ class ItemGrid extends React.Component<IDispatchProps & IStateProps> {
         addItemDispatch={this.addItem}
       />
     </Grid.Column>
-  )
+    );
+  }
+  //   <Grid.Column
+  //     width={4}
+  //     key={item.id}>
+  //     <ItemDisplay
+  //       key={item.id}
+  //       storeItem={item}
+  //       addItemDispatch={this.addItem}
+  //     />
+  //   </Grid.Column>
+  // )
 
   private addItem = (item: IItemFullData, amount: number) => {
-    console.log('ItemGrid');
     if (isNaN(amount)) {
       amount = 1;
     }

@@ -35,39 +35,39 @@ class ItemDisplay extends React.Component<IProps, IState> {
 
   public render() {
     return (
-        <Segment>
-          <DetailedView
+      <Segment>
+        <DetailedView
           item={this.state.item}
           handleClose={this.handleClose}
           open={this.state.showModal}
           addItemToCart={this.props.addItemDispatch}
+        />
+        <Item
+          className='item-display'
+        >
+          <Item.Image
+            className='item-display-image'
+            // src={require(`../../assets/${this.props.storeItem.id}.jpg`)}
+            src={this.props.storeItem.image}
+            size='large'
+            centered
+            onClick={
+              (e: any) => {
+                this.detailsClick(this.props.storeItem);
+                this.handleOpen();
+              }}
           />
-            <Item
-            className='item-display'
-            >
-                <Item.Image
-                    className='item-display-image'
-                    // src={require(`../../assets/${this.props.storeItem.id}.jpg`)}
-                    src={this.props.storeItem.image}
-                    size='large'
-                    centered
-                    onClick={
-                      (e: any) => {
-                        this.detailsClick(this.props.storeItem);
-                        this.handleOpen();
-                      }}
-                />
-                <AddToCart
-                item={this.props.storeItem}
-                />
-            </Item>
-        </Segment>
+          <AddToCart
+            item={this.props.storeItem}
+          />
+        </Item>
+      </Segment>
     );
   }
 
-  private handleOpen = () => this.setState({showModal: true});
-  private handleClose = () => this.setState({showModal: false});
-  private detailsClick = (itemClicked: IItemFullData) => this.setState({item: itemClicked});
+  private handleOpen = () => this.setState({ showModal: true });
+  private handleClose = () => this.setState({ showModal: false });
+  private detailsClick = (itemClicked: IItemFullData) => this.setState({ item: itemClicked });
 
 }
 

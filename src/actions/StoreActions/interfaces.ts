@@ -61,14 +61,27 @@ export interface ReceiveItems {
 export interface GetDeployedStore {
     readonly type: StoreTypes.GET_DEPLOYED_STORE;
     readonly payload: string;
-  }
+}
 export interface NewStore {
     readonly type: StoreTypes.NEW_STORE;
-    readonly payload: string;
 }
 
 export interface GetItem {
     readonly type: StoreTypes.GET_ITEM;
+    readonly payload: number;
+}
+
+export interface GetItemFromContract {
+    readonly payload: number;
+}
+
+export interface AddToLocalItems {
+    readonly type: StoreTypes.ADD_TO_LOCAL_ITEMS;
+    readonly payload: IItemFullData;
+}
+
+export interface SetIndex {
+    readonly type: StoreTypes.SET_INDEX;
     readonly payload: number;
 }
 
@@ -84,4 +97,6 @@ export type TStoreTypes =
     | GetDeployedStore
     | GetItem
     | NewStore
-;
+    | AddToLocalItems
+    | SetIndex
+    ;

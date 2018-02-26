@@ -11,11 +11,11 @@ import {
 } from 'semantic-ui-react';
 import {
   addStoreItem as dAddStoreItem,
-  getItems as dGetItems,
+  getItem as dGetItem,
   IItemFullData,
   incrementIndex as dIncrementIndex,
   TAddStoreItem,
-  TGetItems,
+  TGetItem,
   TIncrementIndex
 } from '../actions/StoreActions';
 import { IAppState } from '../reducers';
@@ -23,7 +23,7 @@ import { IAppState } from '../reducers';
 interface DispatchProps {
   addStoreItem: TAddStoreItem;
   incrementIndex: TIncrementIndex;
-  getItems: TGetItems;
+  getItem: TGetItem;
 }
 
 interface StateProps {
@@ -54,25 +54,25 @@ class AddItemToStore extends React.Component<DispatchProps & StateProps> {
               <Form.Field width={7}>
                 <Label pointing='below' content='Please enter an item name' />
                 <input type='text' required ref={(ref: any) => this.name = ref}
-                placeholder='Item Name'/>
+                  placeholder='Item Name' />
               </Form.Field>
               <Form.Field width={7}>
                 <Label pointing='below' content='Please enter an image url' />
                 <input type='text' required ref={(ref: any) => this.image = ref}
-                placeholder='https://'/>
+                  placeholder='https://' />
               </Form.Field>
             </Form.Group>
             <Form.Group>
               <Form.Field width={10}>
                 <Label pointing='below' content='Please enter an item description' />
                 <textarea ref={(ref: any) => this.description = ref}
-                placeholder='Beautiful Blue Bucket...'/>
+                  placeholder='Beautiful Blue Bucket...' />
               </Form.Field>
               <Form.Field width={4}>
                 <Label pointing='below' content='Please enter the stock of the item' />
                 <input type='number' required ref={(ref: any) => this.stock = ref}
-                placeholder='10'/>
-                <Button type='submit' onClick={(e) => this.addCurrItem()} content='Add New Item'/>
+                  placeholder='10' />
+                <Button type='submit' onClick={(e) => this.addCurrItem()} content='Add New Item' />
               </Form.Field>
             </Form.Group>
           </Form>
@@ -105,6 +105,6 @@ const mapStateToProps = (state: IAppState) => {
 export default connect(mapStateToProps, {
   addStoreItem: dAddStoreItem,
   incrementIndex: dIncrementIndex,
-  getItems: dGetItems,
+  getItem: dGetItem,
 })(AddItemToStore);
 

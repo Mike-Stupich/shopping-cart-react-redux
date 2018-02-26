@@ -17,7 +17,7 @@ export interface IState {
 }
 
 export const INITIAL_STATE: IState = {
-    itemIndex: 1,
+    itemIndex: 0,
     localStock: [],
     web3Stock: [],
     web3: W3.Default = new W3(),
@@ -25,13 +25,14 @@ export const INITIAL_STATE: IState = {
     contractAddress: null
 };
 
-const userAddr = '0x627306090abaB3A6e1400e9345bC60c78a8BEf57';
 
 const deployStoreContract = (state: IState, action: storeActions.NewStore): IState => {
-    const stContract = Store.New(W3.TX.txParamsDefaultDeploy(userAddr), {}, state.web3)
-        .then((contract) => {
-            return contract;
-        });
+    const stContract = state.web3.accounts.then((accounts) => {
+        return Store.New(W3.TX.txParamsDefaultDeploy(accounts[0]), {}, state.web3)
+            .then((contract) => {
+                return contract;
+            });
+    });
     return {
         ...state,
         storeContract: stContract,
@@ -40,11 +41,10 @@ const deployStoreContract = (state: IState, action: storeActions.NewStore): ISta
 };
 
 const getDeployedStore = (state: IState, action: storeActions.GetDeployedStore): IState => {
-    const stContract = Store.At('0xbd2c938b9f6bfc1a66368d08cb44dc3eb2ae27be', state.web3)
+    const stContract = Store.At(action.payload, state.web3)
         .then((contract) => {
             return contract;
         });
-
     return {
         ...state,
         storeContract: stContract,
@@ -54,13 +54,15 @@ const getDeployedStore = (state: IState, action: storeActions.GetDeployedStore):
 
 const addStoreItem = (state: IState, action: storeActions.IAddStoreItem): IState => {
     const desc = action.payload.description ? action.payload.description : '';
-    const itemTx = state.storeContract!
-        .then((store) => {
-            return store.addItem(state.itemIndex, action.payload.name, desc,
-                action.payload.stock, action.payload.image, W3.TX.txParamsDefaultDeploy(userAddr));
-        }).then((tx) => {
-            return tx;
-        });
+    const itemTx = state.web3.accounts.then((accounts) => {
+        return state.storeContract!
+            .then((store) => {
+                return store.addItem(state.itemIndex, action.payload.name, desc,
+                    action.payload.stock, action.payload.image, W3.TX.txParamsDefaultDeploy(accounts[0]));
+            }).then((tx) => {
+                return tx;
+            });
+    });
     return {
         ...state,
         localStock: [
@@ -76,22 +78,31 @@ const addStoreItem = (state: IState, action: storeActions.IAddStoreItem): IState
         ]
     };
 };
+const addToLocalItems = (state: IState, action: storeActions.AddToLocalItems): IState => {
+    return {
+        ...state,
+        localStock: [
+            ...state.localStock,
+            action.payload
+        ]
+    };
+};
 
-const getStoreItems = (state: IState, action: storeActions.GetItem): IState => {
+const getStoreItem = (state: IState, action: storeActions.GetItem): IState => {
     const contract = state.storeContract!;
     const foundItem: Promise<storeActions.IItemFullData> = contract.then((store) => {
-            return store.storeItems(action.payload);
-        }).then((item) => {
-            console.log(item);
-            return {
-                id: action.payload,
-                name: item.name,
-                description: item.description,
-                image: item.image,
-                stock: item.stock,
-                soldout: false,
-            };
-        });
+        return store.storeItems(action.payload);
+    }).then((item) => {
+        console.log(item);
+        return {
+            id: action.payload,
+            name: item.name,
+            description: item.description,
+            image: item.image,
+            stock: item.stock,
+            soldout: false,
+        };
+    });
     if (!foundItem) {
         return {
             ...state,
@@ -100,7 +111,6 @@ const getStoreItems = (state: IState, action: storeActions.GetItem): IState => {
             ]
         };
     }
-    console.log(foundItem);
     return {
         ...state,
         localStock: [
@@ -115,7 +125,6 @@ const incrementIndex = (state: IState, action: storeActions.IIncrementIndex): IS
         itemIndex: state.itemIndex + 1
     };
 };
-
 // const removeStoreItem = (state: IState, action: storeActions.IRemoveStoreItem): IState => {
 //     return {
 //         ...state,
@@ -125,11 +134,17 @@ const incrementIndex = (state: IState, action: storeActions.IIncrementIndex): IS
 //     };
 // };
 
-export const modifyStore = (state: IState = INITIAL_STATE,
-                            action: storeActions.TStoreTypes): IState => {
+const setIndex = (state: IState, action: storeActions.SetIndex): IState => {
+    return {
+        ...state,
+        itemIndex: action.payload,
+    };
+};
+
+export const modifyStore = (state: IState = INITIAL_STATE, action: storeActions.TStoreTypes): IState => {
     switch (action.type) {
         case storeActions.StoreTypes.GET_ITEM:
-            return getStoreItems(state, action);
+            return getStoreItem(state, action);
         case storeActions.StoreTypes.ADD_STORE_ITEM:
             return addStoreItem(state, action);
         case storeActions.StoreTypes.INCREMENT_INDEX:
@@ -138,6 +153,10 @@ export const modifyStore = (state: IState = INITIAL_STATE,
             return getDeployedStore(state, action);
         case storeActions.StoreTypes.NEW_STORE:
             return deployStoreContract(state, action);
+        case storeActions.StoreTypes.ADD_TO_LOCAL_ITEMS:
+            return addToLocalItems(state, action);
+        case storeActions.StoreTypes.SET_INDEX:
+            return setIndex(state, action);
         default:
             return state;
     }

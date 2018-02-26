@@ -100,4 +100,4 @@ const modal: IModal = {
     },
     visibility: false
 };
-export { cart, items, modal};
+export { cart, items, modal };
